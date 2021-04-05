@@ -7,6 +7,7 @@
 	  "ex-gratia": "./bin/ex-gratia"
   },
   "scripts": {
+	"ex-gratia": "./bin/ex-gratia",
     "test": "yarn jest",
 	"build:cjs": "node ./build es5 && webpack && webpack --config ./webpack.config.dev.js",
     "build:esm": "node ./build es6",
