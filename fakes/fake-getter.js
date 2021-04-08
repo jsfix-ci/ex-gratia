@@ -19,15 +19,15 @@ module.exports = function Getter({response, error, wait, statusCode = 200}) {
 			if (limitUntil.getTime() >= now) {
 				responseOverride = '{"message": "API Rate limit exceeded for ..."}';
 				_this.statusCode = 403;
-				_this.headers = [
-					'X-RateLimit-Limit: 10',
-					'X-RateLimit-Remaining: 0',
-					`X-RateLimit-Reset: ${limitUntilSec}`
-				].join("\n");
+				_this.headers = {
+					'x-ratelimit-limit': '10',
+					'x-ratelimit-remaining': '0',
+					'x-ratelimit-reset': String(limitUntilSec)
+				};
 			} else {
 				responseOverride = null;
 				_this.statusCode = statusCode;
-				_this.headers = '';
+				_this.headers = {};
 			}
 
 			if (error || !response) {
