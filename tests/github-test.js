@@ -29,12 +29,44 @@ const SEARCH_RESULT = `{
   ]
 }`;
 
+const EMPTY_SEARCH_RESULT = `{
+	"total_count": 0,
+	"incomplete_results": false,
+	"items": []
+}`;
+
 describe('GitHub client', () => {
 	test('can find users', done => {
 		let getter = new Getter({response: SEARCH_RESULT});
 		let client = new GH({getter});
 		client.find({email: 'svidgen@example.com'}).then(data => {
 			expect(data.login).toEqual('svidgen');
+			done();
+		}).catch(err => {
+			done(err);
+		});
+	});
+	
+	test('returns `null` when not found', done => {
+		let getter = new Getter({response: EMPTY_SEARCH_RESULT});
+		let client = new GH({getter});
+		client.find({email: 'svidgen@example.com'}).then(data => {
+			expect(data).toBe(null);
+			done();
+		}).catch(err => {
+			done(err);
+		});
+	});
+
+	test('retries after rate limit reset as needed', done => {
+		let getter = new Getter({
+			response: SEARCH_RESULT,
+			wait: 1
+		});
+		let client = new GH({getter});
+		client.find({email: 'svidgen@example.com'}).then(data => {
+			expect(data.login).toEqual('svidgen');
+			expect(getter.calls.length).toEqual(2);
 			done();
 		}).catch(err => {
 			done(err);
