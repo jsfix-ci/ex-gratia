@@ -35,8 +35,22 @@ const EMPTY_SEARCH_RESULT = `{
 	"items": []
 }`;
 
+const PROFILE_RESULT = `{
+	"display_name": "Bob Jones",
+	"google_adsense": {
+		"publisher_id": "ca-pub-6115341109827821",
+		"allowed_sites": [
+			"https://www.thepointless.com",
+			"https://mtg.deckanalyzer.com"
+		]
+	}
+}`;
+
+const NON_OBJECT_PROFILE_RESULT = `123`;
+const MALFORMED_PROFILE_RESULT = 'this is not a JSON file at all!'
+
 describe('GitHub client', () => {
-	test('can find users', done => {
+	test('can find users by email address', done => {
 		let getter = new Getter({response: SEARCH_RESULT});
 		let client = new GH({getter});
 		client.find({email: 'svidgen@example.com'}).then(data => {
@@ -47,7 +61,7 @@ describe('GitHub client', () => {
 		});
 	});
 	
-	test('returns `null` when not found', done => {
+	test('returns `null` when not found by email', done => {
 		let getter = new Getter({response: EMPTY_SEARCH_RESULT});
 		let client = new GH({getter});
 		client.find({email: 'svidgen@example.com'}).then(data => {
@@ -67,6 +81,54 @@ describe('GitHub client', () => {
 		client.find({email: 'svidgen@example.com'}).then(data => {
 			expect(data.login).toEqual('svidgen');
 			expect(getter.calls.length).toEqual(2);
+			done();
+		}).catch(err => {
+			done(err);
+		});
+	});
+
+	test('can find user profile', done => {
+		let getter = new Getter({response: PROFILE_RESULT});
+		let client = new GH({getter});
+		client.get({username: 'OK'}).then(user => {
+			expect(user.display_name).toEqual("Bob Jones");
+			expect(user.google_adsense.publisher_id).toEqual(
+				'ca-pub-6115341109827821'
+			);
+			done();
+		}).catch(err => {
+			done(err);
+		});
+	});
+
+	test('returns null when profile does not exist', done => {
+		let getter = new Getter({response: '', statusCode: 404});
+		let client = new GH({getter});
+		client.get({username: 'whatever'}).then(user => {
+			expect(user).toBe(null);
+			done();
+		}).catch(err => {
+			done(err);
+		});
+
+	});
+
+	test('returns null when profile is malformed', done => {
+		let getter = new Getter({response: MALFORMED_PROFILE_RESULT});
+		let client = new GH({getter});
+		client.get({username: 'whatever'}).then(user => {
+			expect(user).toBe(null);
+			done();
+		}).catch(err => {
+			done(err);
+		});
+	});
+
+	test('returns null for non-object JSON profile', done => {
+		let getter = new Getter({response: NON_OBJECT_PROFILE_RESULT});
+		let client = new GH({getter});
+		client.get({username: 'whatever'}).then(user => {
+			expect(user).toBe(null);
 			done();
 		}).catch(err => {
 			done(err);
