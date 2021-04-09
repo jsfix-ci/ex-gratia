@@ -105,7 +105,9 @@ describe('GitHub client', () => {
 		let getter = new Getter({response: '', statusCode: 404});
 		let client = new GH({getter});
 		client.get({username: 'whatever'}).then(user => {
-			expect(user).toBe(null);
+			expect(user.error).toEqual(
+				"Could not find a parsable user profile."
+			);
 			done();
 		}).catch(err => {
 			done(err);
@@ -117,7 +119,9 @@ describe('GitHub client', () => {
 		let getter = new Getter({response: MALFORMED_PROFILE_RESULT});
 		let client = new GH({getter});
 		client.get({username: 'whatever'}).then(user => {
-			expect(user).toBe(null);
+			expect(user.error).toEqual(
+				"Could not find a parsable user profile."
+			);
 			done();
 		}).catch(err => {
 			done(err);
@@ -128,7 +132,9 @@ describe('GitHub client', () => {
 		let getter = new Getter({response: NON_OBJECT_PROFILE_RESULT});
 		let client = new GH({getter});
 		client.get({username: 'whatever'}).then(user => {
-			expect(user).toBe(null);
+			expect(user.error).toEqual(
+				"Profile was not of type `object`."
+			);
 			done();
 		}).catch(err => {
 			done(err);
