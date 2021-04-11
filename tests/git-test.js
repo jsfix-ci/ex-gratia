@@ -1,8 +1,8 @@
 const GitRepo = require('../lib/git-repo.js');
 const {
 	GITLOG,
-	EXPECTED_JSON,
-	EXPECTED_JSON_LIMIT_2
+	EXPECTED_LOG,
+	EXPECTED_LOG_LIMIT_2
 } = require('../fixtures/git.js');
 
 describe('git-repo', () => {
@@ -17,14 +17,14 @@ describe('git-repo', () => {
 		const repo = new GitRepo();
 		const stats = repo.parseLog({log: GITLOG});
 		expect(stats).toBeTruthy();
-		expect(JSON.stringify(stats, null, 2)).toEqual(EXPECTED_JSON);
+		expect(stats).toEqual(EXPECTED_LOG);
 	});
 
 	test('can parse logs up to a defined limit', () => {
 		const repo = new GitRepo();
 		const stats = repo.parseLog({log: GITLOG, limit: 2});
 		expect(stats).toBeTruthy();
-		expect(JSON.stringify(stats, null, 2)).toEqual(EXPECTED_JSON_LIMIT_2);
+		expect(stats).toEqual(EXPECTED_LOG_LIMIT_2);
 	});
 
 });

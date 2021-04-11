@@ -32,7 +32,7 @@ Date:   Thu Apr 8 21:20:13 2021 -0500
  2 files changed, 79 insertions(+), 2 deletions(-)
 `;
 
-const EXPECTED_JSON = `{
+const EXPECTED_LOG = {
   "commits": [
     {
       "author": "iambipedal@gmail.com",
@@ -61,9 +61,9 @@ const EXPECTED_JSON = `{
   ],
   "insertions": 122,
   "deletions": 24
-}`;
+};
 
-const EXPECTED_JSON_LIMIT_2 = `{
+const EXPECTED_LOG_LIMIT_2 = {
   "commits": [
     {
       "author": "iambipedal@gmail.com",
@@ -80,10 +80,10 @@ const EXPECTED_JSON_LIMIT_2 = `{
   ],
   "insertions": 11,
   "deletions": 6
-}`;
+};
 
 module.exports = {
 	GITLOG,
-	EXPECTED_JSON,
-	EXPECTED_JSON_LIMIT_2
+	EXPECTED_LOG,
+	EXPECTED_LOG_LIMIT_2
 };
