@@ -9,6 +9,10 @@ describe('stats', () => {
 		const log = repo.parseLog({log: GITLOG});
 		const stats = new ContributorStats({log});
 
+		expect(stats.insertions).toEqual(122);
+		expect(stats.deletions).toEqual(24);
+		expect(stats.total).toEqual(146);
+
 		expect(stats.contributors['iambipedal@gmail.com']).toEqual({
 			author: 'iambipedal@gmail.com',
 			insertions: 80,
