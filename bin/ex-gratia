@@ -1,3 +1,31 @@
 #!/usr/bin/env node
 
-require("../lib/index");
+const { Command } = require('commander');
+const commands = require("../lib/index");
+
+const args = (new Command())
+	.option(
+		'-a --actions <items>',
+		'The actions to execute. `all` regenerates all outputs. Invalid actions are simply ignored.',
+		(value, dummyPrevious) => value.split(',').map(v => v.trim()),
+		['all']
+	)
+	.option(
+		'-o --output-dir <value>',
+		'The directory to output to. Omit for STDOUT.',
+		null
+	)
+	.option(
+		'-l --limit <number>',
+		'Max number of log entries to look at.',
+		'128'
+	)
+	.parse()
+	.opts()
+;
+
+args.actions.forEach(async action => {
+	if (commands[action]) {
+		await commands[action](args);
+	}
+});
