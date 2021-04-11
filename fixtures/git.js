@@ -59,8 +59,8 @@ const EXPECTED_JSON = `{
       "deletions": 2
     }
   ],
-  "totalInsertions": 122,
-  "totalDeletions": 24
+  "insertions": 122,
+  "deletions": 24
 }`;
 
 const EXPECTED_JSON_LIMIT_2 = `{
@@ -78,8 +78,8 @@ const EXPECTED_JSON_LIMIT_2 = `{
       "deletions": 5
     }
   ],
-  "totalInsertions": 11,
-  "totalDeletions": 6
+  "insertions": 11,
+  "deletions": 6
 }`;
 
 module.exports = {
