@@ -4,8 +4,11 @@ module.exports = function Getter({response, error, wait, statusCode = 200}) {
 	const _this = new EventEmitter();
 
 	let initializedAt = new Date();
-	let limitUntil = new Date(initializedAt.getTime() + (wait || 0) * 1000);
-	let limitUntilSec = Math.floor(limitUntil.getTime()/1000);
+	let limitUntil = wait ?
+		new Date(initializedAt.getTime() + (wait || 0) * 1000) :
+		new Date(2012, 11, 20)
+	;
+	let limitUntilSec = wait ? Math.floor(limitUntil.getTime()/1000) : 0;
 
 	_this.calls = [];
 
