@@ -1,5 +1,6 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
+const path = require('path');
 const rimraf = require('rimraf');
 
 const TEMPDIR = '__test-artifacts-temp';
@@ -14,7 +15,6 @@ afterAll(done => {
 });
 
 describe('ex-gratia cli', () => {
-
 	test('we can run the cli with specified output', () => {
 		const filesCreated = fs.readdirSync(TEMPDIR);
 		expect(filesCreated.sort()).toEqual([
@@ -23,9 +23,8 @@ describe('ex-gratia cli', () => {
 
 		// each file should be json
 		filesCreated.forEach(file => {
-			// TODO: use os-aware path separators
-			expect(require(`../${TEMPDIR}/${file}`)).toBeTruthy();
+			const fullpath = path.join('..', TEMPDIR, file);
+			expect(require(fullpath)).toBeTruthy();
 		});
 	});
-
 });
