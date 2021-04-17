@@ -9,6 +9,7 @@
 	"scripts": {
 		"ex-gratia": "./bin/ex-gratia",
 		"test": "jest",
+		"test:watch": "jest --watchAll",
 		"build:cjs": "node ./build es5 && webpack && webpack --config ./webpack.config.dev.js",
 		"build:esm": "node ./build es6",
 		"build": "npm run clean && npm run build:esm && npm run build:cjs",
@@ -26,8 +27,7 @@
 	"homepage": "https://github.com/svidgen/ex-gratia#readme",
 	"jest": {
 		"testRegex": [
-			"tests/.*\\.js",
-			"use-cases/.*\\.js"
+			"(tests|use-cases)/.*\\.js$"
 		],
 		"moduleFileExtensions": [
 			"js",
