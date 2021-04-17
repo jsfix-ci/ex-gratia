@@ -35,6 +35,7 @@ const EMPTY_SEARCH_RESULT = `{
 	"items": []
 }`;
 
+const PROFILE_URL = "https://raw.githubusercontent.com/svidgen/ex-gratia-profile/main/profile.json";
 const PROFILE_RESULT = `{
 	"display_name": "Bob Jones",
 	"google_adsense": {
@@ -88,12 +89,25 @@ describe('GitHub client', () => {
 	});
 
 	test('can find user profile', done => {
-		let getter = new Getter({response: PROFILE_RESULT});
+		let getter = new Getter({response: { [PROFILE_URL]: PROFILE_RESULT }});
 		let client = new GH({getter});
-		client.get({username: 'OK'}).then(user => {
+		client.get({username: 'svidgen'}).then(user => {
 			expect(user.display_name).toEqual("Bob Jones");
 			expect(user.google_adsense.publisher_id).toEqual(
 				'ca-pub-6115341109827821'
+			);
+			done();
+		}).catch(err => {
+			done(err);
+		});
+	});
+
+	test('does not mistakenly find some default profile', done => {
+		let getter = new Getter({response: { [PROFILE_URL]: PROFILE_RESULT }});
+		let client = new GH({getter});
+		client.get({username: 'NOT-svidgen'}).then(user => {
+			expect(user.error).toEqual(
+				"Could not find a parsable user profile."
 			);
 			done();
 		}).catch(err => {
@@ -112,7 +126,6 @@ describe('GitHub client', () => {
 		}).catch(err => {
 			done(err);
 		});
-
 	});
 
 	test('returns null when profile is malformed', done => {

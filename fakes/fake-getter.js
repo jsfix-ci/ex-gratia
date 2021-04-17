@@ -15,6 +15,11 @@ module.exports = function Getter({response, error, wait, statusCode = 200}) {
 	_this.get = (url, options, callback) => {
 		_this.calls.push({url, options, callback});
 
+		let _response = response;
+		if (typeof(response) === 'object') {
+			_response = response[url];
+		}
+
 		setTimeout(() => {
 			let responseOverride;
 			let now = (new Date()).getTime();
@@ -33,11 +38,11 @@ module.exports = function Getter({response, error, wait, statusCode = 200}) {
 				_this.headers = {};
 			}
 
-			if (error || !response) {
+			if (error || !_response) {
 				_this.emit('error', new Error(error));
 			} else {
 				callback(_this);
-				_this.emit('data', responseOverride || response);
+				_this.emit('data', responseOverride || _response);
 				_this.emit('end');
 			}
 		}, 1);
