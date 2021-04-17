@@ -1,3 +1,4 @@
 node_modules
 __test-artifacts-temp/
+coverage/
 *.swp

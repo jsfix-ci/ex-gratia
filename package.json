@@ -35,6 +35,7 @@
 		],
 		"testEnvironment": "jsdom",
 		"testURL": "http://localhost/",
+		"collectCoverage": true,
 		"coverageThreshold": {
 			"global": {
 				"branches": 0,
