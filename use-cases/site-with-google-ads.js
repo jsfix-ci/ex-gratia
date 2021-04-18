@@ -3,10 +3,18 @@ const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 
+const { all: runAll } = require('../lib/index');
+
 const TEMPDIR = '__test-artifacts-temp';
 
-beforeAll(() => {
-	execSync('yarn ex-gratia -o ' + TEMPDIR);
+beforeAll(async done => {
+
+	// TODO: do end-to-end (via CLI) testing here and create another
+	// set of tests with `getter` injected for branch coverage.
+	// execSync('yarn ex-gratia -o ' + TEMPDIR);
+	await runAll({outputDir: TEMPDIR});
+
+	done();
 });
 
 afterAll(done => {
@@ -15,7 +23,8 @@ afterAll(done => {
 });
 
 describe('ex-gratia cli', () => {
-	test('we can run the cli with specified output', () => {
+
+	test('can be run with specified output directory', () => {
 		const filesCreated = fs.readdirSync(TEMPDIR);
 		expect(filesCreated.sort()).toEqual([
 			'summary.json'
@@ -25,6 +34,19 @@ describe('ex-gratia cli', () => {
 		filesCreated.forEach(file => {
 			const fullpath = path.join('..', TEMPDIR, file);
 			expect(require(fullpath)).toBeTruthy();
+		});
+	});
+
+	test('produces a google-ad-id rotation spec', () => {
+		const exGratiaConfig = require('../ex-gratia-config.json');
+		const rotation = require(path.join('..', TEMPDIR, 'google-ads.json'));
+
+		expect(rotation.defaultId).toEqual(exGratiaConfig.google_adsense.id);
+		expect(rotation.contributors).toBeTruthy();
+		expect(rotation.contributors.length).toBeGreaterThan(0);
+		rotation.contributors.forEach(contributor => {
+			expect(contributor.weight).toBeGreatherThan(0);
+			expect(contributor.id).toBeTruthy();
 		});
 	});
 });
