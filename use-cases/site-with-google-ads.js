@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 
-const { all: runAll } = require('../lib/index');
+const { all: runAll } = require('../lib/cli');
 
 const TEMPDIR = '__test-artifacts-temp';
 
