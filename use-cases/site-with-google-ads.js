@@ -27,6 +27,7 @@ describe('ex-gratia cli', () => {
 	test('can be run with specified output directory', () => {
 		const filesCreated = fs.readdirSync(TEMPDIR);
 		expect(filesCreated.sort()).toEqual([
+			'google_ads.json',
 			'summary.json'
 		].sort());
 
@@ -39,13 +40,13 @@ describe('ex-gratia cli', () => {
 
 	test('produces a google-ad-id rotation spec', () => {
 		const exGratiaConfig = require('../ex-gratia-config.json');
-		const rotation = require(path.join('..', TEMPDIR, 'google-ads.json'));
+		const rotation = require(path.join('..', TEMPDIR, 'google_ads.json'));
 
 		expect(rotation.defaultId).toEqual(exGratiaConfig.google_adsense.id);
 		expect(rotation.contributors).toBeTruthy();
 		expect(rotation.contributors.length).toBeGreaterThan(0);
 		rotation.contributors.forEach(contributor => {
-			expect(contributor.weight).toBeGreatherThan(0);
+			expect(contributor.weight).toBeGreaterThan(0);
 			expect(contributor.id).toBeTruthy();
 		});
 	});
