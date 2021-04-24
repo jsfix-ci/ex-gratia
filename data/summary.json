@@ -1,0 +1,62 @@
+{
+  "stats": {
+    "contributors": {
+      "iambipedal@gmail.com": {
+        "author": "iambipedal@gmail.com",
+        "insertions": 8765,
+        "deletions": 486,
+        "total": 9251,
+        "insertionsPct": 1,
+        "deletionsPct": 1,
+        "totalPct": 1,
+        "githubUser": {
+          "login": "svidgen",
+          "id": 8375502,
+          "node_id": "MDQ6VXNlcjgzNzU1MDI=",
+          "avatar_url": "https://avatars.githubusercontent.com/u/8375502?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/svidgen",
+          "html_url": "https://github.com/svidgen",
+          "followers_url": "https://api.github.com/users/svidgen/followers",
+          "following_url": "https://api.github.com/users/svidgen/following{/other_user}",
+          "gists_url": "https://api.github.com/users/svidgen/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/svidgen/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/svidgen/subscriptions",
+          "organizations_url": "https://api.github.com/users/svidgen/orgs",
+          "repos_url": "https://api.github.com/users/svidgen/repos",
+          "events_url": "https://api.github.com/users/svidgen/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/svidgen/received_events",
+          "type": "User",
+          "site_admin": false,
+          "score": 1
+        },
+        "profile": {
+          "display_name": "Jon Wire",
+          "payments_accepted": [
+            "paypal"
+          ],
+          "profiles": {
+            "linkedin": "https://www.linkedin.com/in/jonwire/"
+          },
+          "sites": {
+            "the pointless dot-com": "https://www.thpeointless.com",
+            "MTG Deck Analyzer": "https://mtg.deckanalyzer.com",
+            "Rate My Disease": "https://www.ratemydisease.com/"
+          },
+          "google_adsense": {
+            "publisher_id": "ca-pub-6115341109827821",
+            "allowed_sites": [
+              "www.thepointless.com",
+              "www.svidgen.com",
+              "mtg.deckanalyzer.com"
+            ]
+          }
+        }
+      }
+    },
+    "insertions": 8765,
+    "deletions": 486,
+    "total": 9251
+  },
+  "isDefault": true
+}
