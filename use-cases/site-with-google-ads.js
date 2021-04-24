@@ -23,7 +23,6 @@ afterAll(done => {
 });
 
 describe('ex-gratia cli', () => {
-
 	test('can be run with specified output directory', () => {
 		const filesCreated = fs.readdirSync(TEMPDIR);
 		expect(filesCreated.sort()).toEqual([
@@ -49,5 +48,26 @@ describe('ex-gratia cli', () => {
 			expect(contributor.weight).toBeGreaterThan(0);
 			expect(contributor.id).toBeTruthy();
 		});
+	});
+});
+
+describe('ex-gratia lib, loaded from default ex-gratia/data/*.json', () => {
+	const ExGratia = require('../lib/index');
+	const eg = new ExGratia();
+
+	test('can provide raw summary data', () => {
+		expect(eg.summary).toBeTruthy();
+	});
+
+	test('can provide raw google ads data', () => {
+		expect(eg.googleAds).toBeTruthy();
+	});
+
+	test('provides a google ad Id', () => {
+		expect(eg.googleAdId).toEqual("ca-pub-6115341109827821");
+	});
+
+	test('provides a google ads auto tag', () => {
+		expect(eg.googleAdsAutoTag).toEqual('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115341109827821" crossorigin="anonymous"></script>');
 	});
 });
