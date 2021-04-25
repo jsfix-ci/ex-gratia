@@ -1,4 +1,5 @@
 node_modules
 __test-artifacts-temp/
 coverage/
+yarn-error.log
 *.swp
