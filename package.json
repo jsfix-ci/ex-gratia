@@ -1,6 +1,6 @@
 {
 	"name": "ex-gratia",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A library to assist with recognizing and compensating contributors to open source projects.",
 	"main": "./lib/index.js",
 	"exports": {
