@@ -1,0 +1,6 @@
+tests
+use-cases
+coverage
+fakes
+fixtures
+*.tgz

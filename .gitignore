@@ -2,4 +2,5 @@ node_modules
 __test-artifacts-temp/
 coverage/
 yarn-error.log
+ex-gratia-*.tgz
 *.swp
