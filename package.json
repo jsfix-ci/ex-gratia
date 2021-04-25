@@ -3,6 +3,10 @@
 	"version": "1.0.0",
 	"description": "A library to assist with recognizing and compensating contributors to open source projects.",
 	"main": "./lib/index.js",
+	"exports": {
+		".": "./lib/index.js",
+		"./google": "./lib/google.js"
+	},
 	"bin": {
 		"ex-gratia": "./bin/ex-gratia"
 	},
@@ -10,9 +14,6 @@
 		"ex-gratia": "./bin/ex-gratia",
 		"test": "jest -w 1",
 		"test:watch": "jest -w 1 --watchAll",
-		"build:cjs": "node ./build es5 && webpack && webpack --config ./webpack.config.dev.js",
-		"build:esm": "node ./build es6",
-		"build": "npm run clean && npm run build:esm && npm run build:cjs",
 		"clean": "rimraf lib-esm lib dist"
 	},
 	"repository": {

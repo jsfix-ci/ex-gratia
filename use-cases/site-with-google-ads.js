@@ -60,14 +60,14 @@ describe('ex-gratia lib, loaded from default ex-gratia/data/*.json', () => {
 	});
 
 	test('can provide raw google ads data', () => {
-		expect(eg.googleAds).toBeTruthy();
+		expect(eg.google.data).toBeTruthy();
 	});
 
 	test('provides a google ad Id', () => {
-		expect(eg.googleAdId).toEqual("ca-pub-6115341109827821");
+		expect(eg.google.id).toEqual("ca-pub-6115341109827821");
 	});
 
 	test('provides a google ads auto tag', () => {
-		expect(eg.googleAdsAutoTag).toEqual('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115341109827821" crossorigin="anonymous"></script>');
+		expect(eg.google.tag).toEqual('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115341109827821" crossorigin="anonymous"></script>');
 	});
 });
