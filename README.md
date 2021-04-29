@@ -36,12 +36,11 @@ Or
 
 #### 3. Include the Google Adsense tag in your app.
 
-At runtime on the client, use the provided DOM node:
+At runtime on the client, use the provided installer to install Google's auto ads tag:
 
 ```
 const GoogleAds = require('ex-gratia/google');
-const ga = new GoogleAds();
-document.head.appendChild(ga.node);
+new GoogleAds().install();
 ```
 
 The provided node is generated once per instantiation of the `GoogleAds` class.

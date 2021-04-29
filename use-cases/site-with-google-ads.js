@@ -66,8 +66,4 @@ describe('ex-gratia lib, loaded from default ex-gratia/data/*.json', () => {
 	test('provides a google ad Id', () => {
 		expect(eg.google.id).toEqual("ca-pub-6115341109827821");
 	});
-
-	test('provides a google ads auto tag', () => {
-		expect(eg.google.tag).toEqual('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6115341109827821" crossorigin="anonymous"></script>');
-	});
 });
