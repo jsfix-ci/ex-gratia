@@ -4,7 +4,7 @@
 
 Ex-gratia gives website and app owners a hands-off mechanism to share revenue with contributuors.
 
-Ex-gratia currently support google ads as a revenue source. To facilitate revenue sharing, ex-gratia shares your ad space by "raffle" Google Publisher ID's, [per Google's own recommendation](https://adsense.googleblog.com/2008/07/sharing-your-ad-space.html). We're planning on adding others.
+Ex-gratia currently support google ads as a revenue source. To facilitate revenue sharing, ex-gratia shares your ad space with a "raffle" of Google Publisher ID's, [ala Google's ad space sharing recommendation](https://adsense.googleblog.com/2008/07/sharing-your-ad-space.html). (We *are* planning on adding others revenue sources.)
 
 ## Installation and Setup
 
@@ -22,7 +22,7 @@ yarn add ex-gratia
 
 #### 2. Update your `package.json`.
 
-Run the `ex-gratia` CLI prior to builds. This will scrapes your git log and write contributor data to the `ex-gratia` module.
+Run the `ex-gratia` CLI prior to builds. This will scrape your git log and write contributor data to the `ex-gratia` module.
 
 ```
 "build": "npx ex-gratia && ..."
@@ -36,21 +36,15 @@ Or
 
 #### 3. Include the Google Adsense tag in your app.
 
-At build time, if you're generating any static pages, we suggest importing the main `ex-gratia` library and writing the Google tag:
-
-```
-const ExGratia = require('ex-gratia');
-const eg = new ExGratia();
-const tagHtml = eg.google.tag;
-```
-
-At runtime on the client, we provide a DOM node. In that case, we suggest importing the smaller `google` module.
+At runtime on the client, use the provided DOM node:
 
 ```
 const GoogleAds = require('ex-gratia/google');
 const ga = new GoogleAds();
 document.head.appendChild(ga.node);
 ```
+
+The provided node is generated once per instantiation of the `GoogleAds` class.
 
 #### 4. Let your contributors know.
 
