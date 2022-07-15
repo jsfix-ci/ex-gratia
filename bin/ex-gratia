@@ -22,7 +22,6 @@ const args = (new Command())
 	)
 	.parse()
 	.opts()
-;
 
 args.actions.forEach(async action => {
 	if (commands[action]) {
